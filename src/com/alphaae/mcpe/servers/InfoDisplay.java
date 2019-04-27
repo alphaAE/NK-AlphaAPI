@@ -18,7 +18,11 @@ import cn.nukkit.scheduler.Task;
 import cn.nukkit.scheduler.TaskHandler;
 import cn.nukkit.utils.TextFormat;
 
+import java.util.UUID;
+
 public class InfoDisplay implements Listener {
+
+    private final int WAITING_TIME = 170;
 
     private TaskHandler infoHandler;
 
@@ -26,8 +30,8 @@ public class InfoDisplay implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
 
-        showTestWindow(player);
-//        showJoinWindow(player);
+        showJoinWindow(player);
+//        showTestWindow(player);
 
         try {
             infoHandler = TestPlugin.getPlugin().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
@@ -35,9 +39,12 @@ public class InfoDisplay implements Listener {
                 public void onRun(int i) {
                     String name = player.getName();
                     int ping = player.getPing();
-                    player.sendActionBar(TextFormat.colorize("&b" + name + " &fping: " + ping + "ms "));
+                    String uuid = player.getUniqueId().toString();
+                    int coin = 2000;
+
+                    player.sendActionBar(TextFormat.colorize("&b" + name + " &f延迟: " + ping + "ms 硬币: " + coin));
                 }
-            }, 100, 10);
+            }, WAITING_TIME, 12);
         } catch (Exception e) {
             infoHandler.cancel();
             e.printStackTrace();
@@ -54,12 +61,10 @@ public class InfoDisplay implements Listener {
     private void showJoinWindow(Player player) {
         new NukkitRunnable() {
             public void run() {
-                FormWindowSimple form = new FormWindowSimple("介绍", "欢迎你 " + player.getName() + " \n\n介绍什么的懒得写了，还在开发中。。。\nQwQ\n\n\n\n\n\n\n\n\n\n");
-                form.addButton(new ElementButton("关闭"));
-
+                FormWindowSimple form = new FormWindowSimple("公告", "欢迎你 " + player.getName() + " \n\nQwQ，还在开发中。。。\n\n开始测试硬币系统");
                 player.showFormWindow(form);
             }
-        }.runTaskLater(TestPlugin.getPlugin(), 100);
+        }.runTaskLater(TestPlugin.getPlugin(), WAITING_TIME);
     }
 
     private void showTestWindow(Player player) {
@@ -77,7 +82,8 @@ public class InfoDisplay implements Listener {
 ////                f1.getClickedButtonId();
                 player.showFormWindow(form);
             }
-        }.runTaskLater(TestPlugin.getPlugin(), 100);
+        }.runTaskLater(TestPlugin.getPlugin(), WAITING_TIME);
+
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
