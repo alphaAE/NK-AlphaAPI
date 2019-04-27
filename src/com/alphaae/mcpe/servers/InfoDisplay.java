@@ -22,7 +22,7 @@ import java.util.UUID;
 
 public class InfoDisplay implements Listener {
 
-    private final int WAITING_TIME = 170;
+    private final int WAITING_TIME = 174;
 
     private TaskHandler infoHandler;
 
