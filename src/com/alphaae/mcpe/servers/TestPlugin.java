@@ -3,9 +3,20 @@ package com.alphaae.mcpe.servers;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.form.element.Element;
+import cn.nukkit.form.element.ElementButtonImageData;
+import cn.nukkit.form.element.ElementDropdown;
+import cn.nukkit.form.element.ElementInput;
+import cn.nukkit.form.window.FormWindowCustom;
+import cn.nukkit.form.window.FormWindowSimple;
+import cn.nukkit.inventory.InventoryType;
+import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestPlugin extends PluginBase {
 
@@ -39,14 +50,15 @@ public class TestPlugin extends PluginBase {
         switch (command.getName()) {
             case "hi":
                 if (sender.isPlayer()) {
-                    player.sendTitle("Hi TiTle");
-                    player.sendPopup("Hi Popup");
-                    player.sendActionBar("Hi ActionBar");
-                    player.sendTip("Hi Tip");
+//                    List<Element> list = new ArrayList();
+//                    list.add(new ElementDropdown("2333"));
+//                    list.add(new ElementInput("输入"));
+//                    FormWindowCustom form = new FormWindowCustom("title", list);
+////                    form.addButton(ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/melon.png"));
+//                    player.showFormWindow()
                 }
-                sender.sendMessage("Hi " + sender.getName());
                 return true;
-//
+
 //            case "menu":
 //                player.chat("/el open default.yml");
 //                return true;

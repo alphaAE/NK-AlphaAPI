@@ -90,7 +90,6 @@ public class InfoDisplay implements Listener {
     public void onPlayerFormResponded(PlayerFormRespondedEvent event) {
         final Player player = event.getPlayer();
         final FormResponse formResponse = event.getResponse();
-
 //        FormResponseModal response = (FormResponseModal) formResponse;
 //        player.sendMessage("" + response.getClickedButtonId());
     }
