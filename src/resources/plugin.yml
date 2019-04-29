@@ -1,5 +1,5 @@
-name: TestPlugin
-main: com.alphaae.mcpe.servers.TestPlugin
+name: MainPlugin
+main: com.alphaae.mcpe.servers.MainPlugin
 version:  "1.0.0"
 api: ["1.0.8"]
 
@@ -10,19 +10,12 @@ description: AlpheAE的测试插件
 website: http://www.alphaae.com
 
 permissions:
-  testplugin.command.hi:
-    description: 允许用户使用hi指令
-    default: true
   testplugin.command.menu:
     description: 允许用户使用menu指令
     default: true
 
-commands:
-  hi:
-    description: hi指令
-    usage: "/hi"
-    permission: testplugin.command.hi
-#  menu:
-#    description: 菜单指令
-#    usage: "/menu"
-#    permission: testplugin.command.hi
+#commands:
+#  hi:
+#    description: 测试指令
+#    usage: "/hi"
+#    permission: testplugin.command.menu
