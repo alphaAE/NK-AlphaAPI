@@ -12,6 +12,10 @@ import cn.nukkit.scheduler.TaskHandler;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.Config;
 import com.alphaae.mcpe.servers.MainPlugin;
+import com.alphaae.mcpe.servers.StaticData;
+import com.alphaae.mcpe.servers.model.RePlayer;
+
+import java.util.UUID;
 
 public class DisplayInfoBlock implements JoinQuitEventBlock {
 
@@ -20,6 +24,7 @@ public class DisplayInfoBlock implements JoinQuitEventBlock {
     public DisplayInfoBlock() {
     }
 
+    @Override
     public void onPlayerJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
 
@@ -27,12 +32,13 @@ public class DisplayInfoBlock implements JoinQuitEventBlock {
             infoHandler = MainPlugin.getPlugin().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
                 @Override
                 public void onRun(int i) {
-                    String name = player.getName();
+                    String name = player.getDisplayName();
                     int ping = player.getPing();
-                    String uuid = player.getUniqueId().toString();
-                    int coin = 2000;
+                    UUID uuid = player.getUniqueId();
+                    RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
+                    int coin = rePlayer.getCoin();
 
-                    player.sendActionBar(TextFormat.colorize("&b" + name + " &f延迟: " + ping + "ms 硬币: " + coin));
+                    player.sendActionBar(TextFormat.colorize("" + name + " &f延迟: " + ping + "ms 硬币: " + coin));
                 }
             }, Config.JOIN_WAITING_TIME, 12);
         } catch (Exception e) {
@@ -42,6 +48,7 @@ public class DisplayInfoBlock implements JoinQuitEventBlock {
 
     }
 
+    @Override
     public void onPlayerQuit(PlayerQuitEvent event) {
         if (infoHandler != null)
             infoHandler.cancel();

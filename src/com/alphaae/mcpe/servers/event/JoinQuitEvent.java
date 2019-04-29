@@ -8,6 +8,7 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import com.alphaae.mcpe.servers.event.block.joinquit.DisplayInfoBlock;
 import com.alphaae.mcpe.servers.event.block.joinquit.JoinQuitEventBlock;
 import com.alphaae.mcpe.servers.event.block.joinquit.JoinWindowBlock;
+import com.alphaae.mcpe.servers.event.block.joinquit.LoadPlayerDataBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class JoinQuitEvent implements Listener {
         eventBlockList = new ArrayList<>();
         eventBlockList.add(new DisplayInfoBlock());
         eventBlockList.add(new JoinWindowBlock());
+        eventBlockList.add(new LoadPlayerDataBlock());
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
