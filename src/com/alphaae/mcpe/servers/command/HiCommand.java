@@ -5,7 +5,12 @@ import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.MainPlugin;
+import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.form.FormWindowMy;
+import com.alphaae.mcpe.servers.model.RePlayer;
+import com.alphaae.mcpe.servers.utils.ChangePlayerCoinUtils;
+
+import java.util.UUID;
 
 public class HiCommand extends Command {
     private MainPlugin plugin;
@@ -24,9 +29,12 @@ public class HiCommand extends Command {
         }
 
         Player player = commandSender.getServer().getPlayer(commandSender.getName());
+        UUID uuid = player.getUniqueId();
         if (commandSender.isPlayer()) {
-            FormWindowMy form = new FormWindowMy(player);
-            player.showFormWindow(form);
+//            FormWindowMy form = new FormWindowMy(player);
+//            player.showFormWindow(form);
+            RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
+            ChangePlayerCoinUtils.ReduceIcon(rePlayer, 100);
             return true;
         }
         return false;

@@ -3,10 +3,6 @@ package com.alphaae.mcpe.servers.event.block.joinquit;
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
-import cn.nukkit.form.window.FormWindowSimple;
-import cn.nukkit.scheduler.NukkitRunnable;
 import cn.nukkit.scheduler.Task;
 import cn.nukkit.scheduler.TaskHandler;
 import cn.nukkit.utils.TextFormat;
@@ -27,6 +23,7 @@ public class DisplayInfoBlock implements JoinQuitEventBlock {
     @Override
     public void onPlayerJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
+        final UUID uuid = player.getUniqueId();
 
         try {
             infoHandler = MainPlugin.getPlugin().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
@@ -34,13 +31,12 @@ public class DisplayInfoBlock implements JoinQuitEventBlock {
                 public void onRun(int i) {
                     String name = player.getDisplayName();
                     int ping = player.getPing();
-                    UUID uuid = player.getUniqueId();
                     RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
                     int coin = rePlayer.getCoin();
 
                     player.sendActionBar(TextFormat.colorize("" + name + " &f延迟: " + ping + "ms 硬币: " + coin));
                 }
-            }, Config.JOIN_WAITING_TIME, 12);
+            }, Config.JOIN_WAITING_TIME, 36);
         } catch (Exception e) {
             infoHandler.cancel();
             e.printStackTrace();

@@ -6,6 +6,7 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.model.RePlayer;
+import com.alphaae.mcpe.servers.utils.PlayerDataLoadUtils;
 
 public class LoadPlayerDataBlock implements JoinQuitEventBlock {
 
@@ -14,12 +15,11 @@ public class LoadPlayerDataBlock implements JoinQuitEventBlock {
         Player player = event.getPlayer();
 
         //读取数据
+        RePlayer rePlayer = PlayerDataLoadUtils.LoadData(player);
 
-        String title = "[称号]";
+        String title = rePlayer.getTitle();
 
-        player.setDisplayName(TextFormat.colorize("&e" + title + " &b" + player.getName() + "&f"));
-
-        RePlayer rePlayer = new RePlayer(player, title, 4000);
+        player.setDisplayName(TextFormat.colorize("&e[" + title + "] &b" + player.getName() + "&f"));
         StaticData.rePlayerMap.put(player.getUniqueId(), rePlayer);
     }
 
@@ -28,4 +28,6 @@ public class LoadPlayerDataBlock implements JoinQuitEventBlock {
         Player player = event.getPlayer();
         StaticData.rePlayerMap.remove(player.getUniqueId());
     }
+
+
 }
