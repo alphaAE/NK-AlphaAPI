@@ -19,6 +19,7 @@ public class LoadPlayerDataBlock implements JoinQuitEventBlock {
 
         String title = rePlayer.getTitle();
 
+        player.setNameTag(TextFormat.colorize("&e[" + title + "] &b" + player.getName() + "&f"));
         player.setDisplayName(TextFormat.colorize("&e[" + title + "] &b" + player.getName() + "&f"));
         StaticData.rePlayerMap.put(player.getUniqueId(), rePlayer);
     }

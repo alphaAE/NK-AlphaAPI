@@ -6,7 +6,6 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.MainPlugin;
 import com.alphaae.mcpe.servers.StaticData;
-import com.alphaae.mcpe.servers.form.FormWindowMy;
 import com.alphaae.mcpe.servers.model.RePlayer;
 import com.alphaae.mcpe.servers.utils.ChangePlayerCoinUtils;
 
@@ -23,16 +22,15 @@ public class HiCommand extends Command {
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
         if (!this.plugin.isEnabled()) return false;
-        if (!commandSender.hasPermission("testplugin.command.menu")) {
+        if (!commandSender.hasPermission("alphaapi.command.everybody")) {
             commandSender.sendMessage(TextFormat.RED + "你没有权限使用该指令");
             return false;
         }
 
-        Player player = commandSender.getServer().getPlayer(commandSender.getName());
-        UUID uuid = player.getUniqueId();
         if (commandSender.isPlayer()) {
-//            FormWindowMy form = new FormWindowMy(player);
-//            player.showFormWindow(form);
+            Player player = commandSender.getServer().getPlayer(commandSender.getName());
+            UUID uuid = player.getUniqueId();
+            //测试指令
             RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
             ChangePlayerCoinUtils.ReduceIcon(rePlayer, 100);
             return true;

@@ -13,7 +13,7 @@ import com.alphaae.mcpe.servers.event.block.joinquit.LoadPlayerDataBlock;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JoinQuitEvent implements Listener {
+public class PlayerJoinQuitEvent implements Listener {
 
     private static List<JoinQuitEventBlock> eventBlockList;
 

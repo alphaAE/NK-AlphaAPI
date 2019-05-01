@@ -5,7 +5,8 @@ import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
 import com.alphaae.mcpe.servers.command.HiCommand;
-import com.alphaae.mcpe.servers.event.JoinQuitEvent;
+import com.alphaae.mcpe.servers.event.PlayerInteractSetEvent;
+import com.alphaae.mcpe.servers.event.PlayerJoinQuitEvent;
 
 public class MainPlugin extends PluginBase {
 
@@ -17,7 +18,7 @@ public class MainPlugin extends PluginBase {
 
     @Override
     public void onLoad() {
-        getLogger().info("onLoad! QwQ");
+        getLogger().info("AlphaAPI被加载！");
     }
 
     @Override
@@ -41,11 +42,12 @@ public class MainPlugin extends PluginBase {
 
     private void registerCommands() {
         SimpleCommandMap commandMap = getServer().getCommandMap();
-        commandMap.register("TestPlugin", new HiCommand(this));
+        commandMap.register("AlphaAPI", new HiCommand(this));
     }
 
     private void registerEvents() {
         PluginManager pluginManager = getServer().getPluginManager();
-        pluginManager.registerEvents(new JoinQuitEvent(), this);
+        pluginManager.registerEvents(new PlayerJoinQuitEvent(), this);
+        pluginManager.registerEvents(new PlayerInteractSetEvent(), this);
     }
 }

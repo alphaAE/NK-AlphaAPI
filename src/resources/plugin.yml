@@ -1,4 +1,4 @@
-name: MainPlugin
+name: AlphaAPI
 main: com.alphaae.mcpe.servers.MainPlugin
 version:  "1.0.0"
 api: ["1.0.8"]
@@ -6,12 +6,18 @@ api: ["1.0.8"]
 load: POSTWORLD
 
 author: alphaAE
-description: AlpheAE的测试插件
+description: AlpheAE 插件组 核心插件
 website: http://www.alphaae.com
 
 permissions:
-  testplugin.command.menu:
-    description: 允许用户使用menu指令
+  alphaapi.command.console:
+    description: 允许控制台使用的指令
+    default: false
+  alphaapi.command.op:
+    description: 允许OP用户使用的指令
+    default: op
+  alphaapi.command.everybody:
+    description: 允许所有用户使用的指令
     default: true
 
 #commands:
