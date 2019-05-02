@@ -24,9 +24,14 @@ public class JoinWindowBlock implements JoinQuitEventBlock {
     private void showJoinWindow(Player player) {
         new NukkitRunnable() {
             public void run() {
-                String joinText = MainPlugin.getPlugin().getConfig().getString("join-text");
-                FormWindowSimple form = new FormWindowSimple("公告", "欢迎你 " + player.getName() + " \n\n" + joinText);
-                player.showFormWindow(form);
+                try {
+                    String joinText = MainPlugin.getPlugin().getConfig().getString("join-text");
+                    FormWindowSimple form = new FormWindowSimple("公告", "欢迎你 " + player.getName() + " \n\n" + joinText);
+                    player.showFormWindow(form);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    cancel();
+                }
             }
         }.runTaskLater(MainPlugin.getPlugin(), Config.JOIN_WAITING_TIME);
     }

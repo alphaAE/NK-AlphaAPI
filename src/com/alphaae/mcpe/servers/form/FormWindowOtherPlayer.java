@@ -5,6 +5,9 @@ import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
+import cn.nukkit.utils.TextFormat;
+import com.alphaae.mcpe.servers.StaticData;
+import com.alphaae.mcpe.servers.model.RePlayer;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -17,24 +20,22 @@ public class FormWindowOtherPlayer extends FormWindow {
     private List<ElementButton> buttons;
     private FormResponseSimple response;
 
-    public FormWindowOtherPlayer(Player player) {
-        this.title = "";
-        this.content = "";
-        this.response = null;
+    public FormWindowOtherPlayer(Player player, Player player2) {
+//        String name = player.getName();
+//        RePlayer rePlayer = StaticData.rePlayerMap.get(player.getUniqueId());
+        String name2 = player2.getName();
+        RePlayer rePlayer2 = StaticData.rePlayerMap.get(player2.getUniqueId());
 
-        String name = player.getName();
-        String coin = "2000";
-
-        String content = "" + name + "\n" +
-                "---------------------------------\n---------------------------------\n" +
-                "硬币：  " + coin + "\n" +
-                "";
-
-        this.title = name;
-        this.content = content;
+        this.title = "玩家：" + name2;
         this.buttons = new ArrayList();
+        this.content = TextFormat.colorize("&b" + name2 + "&f\n" +
+                "---------------------------------\n" +
+                "称号：  " + rePlayer2.getTitle() + "\n" +
+                "---------------------------------\n" +
+                "");
 
-        buttons.add(new ElementButton("", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "")));
+        buttons.add(new ElementButton("组队", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/iron_helmet.png")));
+        buttons.add(new ElementButton("交易", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/emerald.png")));
     }
 
     public String getTitle() {

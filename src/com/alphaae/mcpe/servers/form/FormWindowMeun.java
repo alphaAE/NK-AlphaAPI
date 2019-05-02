@@ -21,12 +21,11 @@ public class FormWindowMeun extends FormWindow {
     private FormResponseSimple response;
 
     public FormWindowMeun(Player player) {
-        this.title = "我";
-        this.buttons = new ArrayList();
-
         String name = player.getName();
         RePlayer rePlayer = StaticData.rePlayerMap.get(player.getUniqueId());
 
+        this.title = "我";
+        this.buttons = new ArrayList();
         this.content = TextFormat.colorize("&b" + name + "&f\n" +
                 "---------------------------------\n" +
                 "称号：  " + rePlayer.getTitle() + "\n" +
