@@ -24,6 +24,7 @@ public class PlayerJoinQuitEvent implements Listener {
         eventBlockList.add(new LoadPlayerDataBlock());
     }
 
+    //玩家加入事件
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onPlayerJoin(PlayerJoinEvent event) {
         for (JoinQuitEventBlock eventBlock : eventBlockList) {
@@ -31,6 +32,7 @@ public class PlayerJoinQuitEvent implements Listener {
         }
     }
 
+    //玩家退出事件
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onPlayerQuit(PlayerQuitEvent event) {
         for (JoinQuitEventBlock eventBlock : eventBlockList) {

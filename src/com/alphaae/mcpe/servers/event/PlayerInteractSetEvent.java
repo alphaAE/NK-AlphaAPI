@@ -15,8 +15,22 @@ import com.alphaae.mcpe.servers.form.FormWindowOtherPlayer;
 
 public class PlayerInteractSetEvent implements Listener {
 
+    //玩家长按交互事件
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onPlayerInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        Item item = event.getItem();
+        if (player != null && item != null) {
+//            if (item.getId() == 347) {
+//                FormWindowMeun form = new FormWindowMeun(player);
+//                player.showFormWindow(form);
+//            }
+        }
+    }
+
+    //玩家手持物品事件
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
+    public void onPlayerItemHeld(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         Item item = event.getItem();
         if (player != null && item != null) {
@@ -27,17 +41,7 @@ public class PlayerInteractSetEvent implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
-    public void onPlayerItemHeld(PlayerItemHeldEvent event) {
-        Player player = event.getPlayer();
-        Item item = event.getItem();
-        if (player != null && item != null) {
-            if (item.getId() == 347) {
-
-            }
-        }
-    }
-
+    //玩家长按触碰实体
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();

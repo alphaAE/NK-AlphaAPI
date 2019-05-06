@@ -5,6 +5,7 @@ import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
 import com.alphaae.mcpe.servers.command.HiCommand;
+import com.alphaae.mcpe.servers.event.FormRespondedEvent;
 import com.alphaae.mcpe.servers.event.PlayerInteractSetEvent;
 import com.alphaae.mcpe.servers.event.PlayerJoinQuitEvent;
 
@@ -49,5 +50,6 @@ public class MainPlugin extends PluginBase {
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(new PlayerJoinQuitEvent(), this);
         pluginManager.registerEvents(new PlayerInteractSetEvent(), this);
+        pluginManager.registerEvents(new FormRespondedEvent(), this);
     }
 }

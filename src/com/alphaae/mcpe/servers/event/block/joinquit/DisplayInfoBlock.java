@@ -24,15 +24,15 @@ public class DisplayInfoBlock implements JoinQuitEventBlock {
     public void onPlayerJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
         final UUID uuid = player.getUniqueId();
-        final String name = player.getDisplayName();
 
         try {
             infoHandler = MainPlugin.getPlugin().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
                 @Override
                 public void onRun(int i) {
                     try {
-                        int ping = player.getPing();
                         RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
+                        String name = player.getDisplayName();
+                        int ping = player.getPing();
                         int coin = rePlayer.getCoin();
 
                         player.sendActionBar(TextFormat.colorize("" + name + " &f延迟: " + ping + "ms 硬币: " + coin));
