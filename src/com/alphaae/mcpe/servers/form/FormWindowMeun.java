@@ -9,13 +9,14 @@ import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.StaticData;
+import com.alphaae.mcpe.servers.event.block.form.FormEvent;
 import com.alphaae.mcpe.servers.model.RePlayer;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormWindowMeun extends FormWindowSimple {
+public class FormWindowMeun extends FormWindowSimple implements FormEvent {
 
     public FormWindowMeun(Player player) {
         super("我", "");
@@ -45,7 +46,7 @@ public class FormWindowMeun extends FormWindowSimple {
         String clickedText = ((FormResponseSimple) event.getResponse()).getClickedButton().getText();
         Player player = event.getPlayer();
         if (!event.wasClosed()) {
-            switch (clickedText){
+            switch (clickedText) {
                 case "传送":
                     player.sendMessage("传送");
                     break;

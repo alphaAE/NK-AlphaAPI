@@ -5,7 +5,9 @@ import java.util.UUID;
 
 public class RePlayer implements Serializable {
     private UUID uuid;
+    //称号
     private String title;
+    //硬币
     private int coin;
 
     public RePlayer(UUID uuid, String title, int coin) {

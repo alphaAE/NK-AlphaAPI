@@ -9,13 +9,14 @@ import cn.nukkit.form.window.FormWindow;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.StaticData;
+import com.alphaae.mcpe.servers.event.block.form.FormEvent;
 import com.alphaae.mcpe.servers.model.RePlayer;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormWindowOtherPlayer extends FormWindowSimple {
+public class FormWindowOtherPlayer extends FormWindowSimple implements FormEvent {
 
     public FormWindowOtherPlayer(Player player, Player player2) {
         super("", "");
@@ -40,13 +41,21 @@ public class FormWindowOtherPlayer extends FormWindowSimple {
     private void createButtons() {
         addButton(new ElementButton("组队", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/iron_helmet.png")));
         addButton(new ElementButton("交易", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/emerald.png")));
-
     }
 
     public void RespondedEvent(PlayerFormRespondedEvent event) {
         String clickedText = ((FormResponseSimple) event.getResponse()).getClickedButton().getText();
         Player player = event.getPlayer();
-
+        if (!event.wasClosed()) {
+            switch (clickedText){
+                case "组队":
+                    player.sendMessage("组队");
+                    break;
+                case "交易":
+                    player.sendMessage("交易");
+                    break;
+            }
+        }
     }
 
 }
