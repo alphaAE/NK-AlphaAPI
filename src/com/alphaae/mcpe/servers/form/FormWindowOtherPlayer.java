@@ -1,10 +1,12 @@
 package com.alphaae.mcpe.servers.form;
 
 import cn.nukkit.Player;
+import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindow;
+import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.model.RePlayer;
@@ -13,79 +15,38 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormWindowOtherPlayer extends FormWindow {
-    private final String type = "form";
-    private String title;
-    private String content;
-    private List<ElementButton> buttons;
-    private FormResponseSimple response;
+public class FormWindowOtherPlayer extends FormWindowSimple {
 
     public FormWindowOtherPlayer(Player player, Player player2) {
-//        String name = player.getName();
-//        RePlayer rePlayer = StaticData.rePlayerMap.get(player.getUniqueId());
+        super("", "");
+        createContents(player, player2);
+        createButtons();
+    }
+
+    private void createContents(Player player, Player player2) {
+        String name = player.getName();
+        RePlayer rePlayer = StaticData.rePlayerMap.get(player.getUniqueId());
         String name2 = player2.getName();
         RePlayer rePlayer2 = StaticData.rePlayerMap.get(player2.getUniqueId());
-
-        this.title = "玩家：" + name2;
-        this.buttons = new ArrayList();
-        this.content = TextFormat.colorize("&b" + name2 + "&f\n" +
+        String content = TextFormat.colorize("&b" + name2 + "&f\n" +
                 "---------------------------------\n" +
                 "称号：  " + rePlayer2.getTitle() + "\n" +
                 "---------------------------------\n" +
                 "");
-
-        buttons.add(new ElementButton("组队", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/iron_helmet.png")));
-        buttons.add(new ElementButton("交易", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/emerald.png")));
+        setTitle("玩家：" + name2);
+        setContent(content);
     }
 
-    public String getTitle() {
-        return this.title;
+    private void createButtons() {
+        addButton(new ElementButton("组队", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/iron_helmet.png")));
+        addButton(new ElementButton("交易", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/emerald.png")));
+
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void RespondedEvent(PlayerFormRespondedEvent event) {
+        String clickedText = ((FormResponseSimple) event.getResponse()).getClickedButton().getText();
+        Player player = event.getPlayer();
+
     }
 
-    public String getContent() {
-        return this.content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public List<ElementButton> getButtons() {
-        return this.buttons;
-    }
-
-    public void addButton(ElementButton button) {
-        this.buttons.add(button);
-    }
-
-    public String getJSONData() {
-        return (new Gson()).toJson(this);
-    }
-
-    public FormResponseSimple getResponse() {
-        return this.response;
-    }
-
-    public void setResponse(String data) {
-        if (data.equals("null")) {
-            this.closed = true;
-        } else {
-            int buttonID;
-            try {
-                buttonID = Integer.parseInt(data);
-            } catch (Exception var4) {
-                return;
-            }
-
-            if (buttonID >= this.buttons.size()) {
-                this.response = new FormResponseSimple(buttonID, (ElementButton) null);
-            } else {
-                this.response = new FormResponseSimple(buttonID, (ElementButton) this.buttons.get(buttonID));
-            }
-        }
-    }
 }
