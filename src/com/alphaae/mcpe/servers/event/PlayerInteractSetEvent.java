@@ -1,6 +1,7 @@
 package com.alphaae.mcpe.servers.event;
 
 import cn.nukkit.Player;
+import cn.nukkit.block.Block;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
@@ -20,11 +21,12 @@ public class PlayerInteractSetEvent implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Item item = event.getItem();
+        Block block = event.getBlock();
         if (player != null && item != null) {
-//            if (item.getId() == 347) {
-//                FormWindowMeun form = new FormWindowMeun(player);
-//                player.showFormWindow(form);
-//            }
+            if (item.getId() == 0 && block.getId() == 0) {
+                FormWindowMeun form = new FormWindowMeun(player);
+                player.showFormWindow(form);
+            }
         }
     }
 
@@ -46,12 +48,10 @@ public class PlayerInteractSetEvent implements Listener {
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
         Entity entity = event.getEntity();
-        Item item = event.getItem();
-        if (player != null && entity != null && item != null) {
+//        Item item = event.getItem();
+        if (player != null && entity != null) {
             try {
                 Player player2 = (Player) entity;
-//                player.sendMessage("你触碰了玩家" + player.getName());
-//                player2.sendMessage("你被" + player.getName() + "触碰了");
                 FormWindowOtherPlayer formWindowOtherPlayer = new FormWindowOtherPlayer(player, player2);
                 player.showFormWindow(formWindowOtherPlayer);
             } catch (Exception e) {

@@ -7,7 +7,7 @@ import com.alphaae.mcpe.servers.model.RePlayer;
 import java.io.*;
 import java.util.UUID;
 
-public class PlayerDataLoadUtils {
+public class PlayerDataUtils {
 
     private static final String FILE_TYPE = ".replayer";
     private static final File DATA_FOLDER = MainPlugin.getPlugin().getDataFolder();
@@ -54,6 +54,8 @@ public class PlayerDataLoadUtils {
             playerDataFile.createNewFile();
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(playerDataFile));
             RePlayer rePlayer = new RePlayer(uuid, "新火", 2000);
+
+
             outputStream.writeObject(rePlayer);
             outputStream.close();
             return true;

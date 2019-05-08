@@ -11,7 +11,7 @@ public class ChangePlayerCoinUtils {
         int userCoin = rePlayer.getCoin();
         int newCoin = userCoin + count;
         rePlayer.setCoin(newCoin);
-        return PlayerDataLoadUtils.ChangeData(rePlayer);
+        return PlayerDataUtils.ChangeData(rePlayer);
     }
 
     public static boolean ReduceIcon(RePlayer rePlayer, int count) {
@@ -19,7 +19,7 @@ public class ChangePlayerCoinUtils {
         int newCoin = userCoin - count;
         if (newCoin >= 0) {
             rePlayer.setCoin(newCoin);
-            return PlayerDataLoadUtils.ChangeData(rePlayer);
+            return PlayerDataUtils.ChangeData(rePlayer);
         }
         Player player = MainPlugin.getPlugin().getServer().getPlayer(rePlayer.getUuid()).get();
         player.sendMessage(TextFormat.colorize("&4硬币不足"));
@@ -34,7 +34,7 @@ public class ChangePlayerCoinUtils {
         if (newCoin1 >= 0) {
             rePlayer1.setCoin(newCoin1);
             rePlayer2.setCoin(newCoin2);
-            return PlayerDataLoadUtils.ChangeData(rePlayer1) & PlayerDataLoadUtils.ChangeData(rePlayer2);
+            return PlayerDataUtils.ChangeData(rePlayer1) & PlayerDataUtils.ChangeData(rePlayer2);
         }
         Player player = MainPlugin.getPlugin().getServer().getPlayer(rePlayer1.getUuid()).get();
         player.sendMessage(TextFormat.colorize("&4硬币不足"));

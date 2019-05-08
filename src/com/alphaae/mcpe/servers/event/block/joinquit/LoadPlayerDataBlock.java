@@ -6,7 +6,7 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.model.RePlayer;
-import com.alphaae.mcpe.servers.utils.PlayerDataLoadUtils;
+import com.alphaae.mcpe.servers.utils.PlayerDataUtils;
 
 public class LoadPlayerDataBlock implements JoinQuitEventBlock {
 
@@ -15,7 +15,7 @@ public class LoadPlayerDataBlock implements JoinQuitEventBlock {
         Player player = event.getPlayer();
 
         //读取数据
-        RePlayer rePlayer = PlayerDataLoadUtils.LoadData(player);
+        RePlayer rePlayer = PlayerDataUtils.LoadData(player);
 
         String title = rePlayer.getTitle();
 
