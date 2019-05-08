@@ -1,6 +1,7 @@
 package com.alphaae.mcpe.servers.utils;
 
 import cn.nukkit.Player;
+import cn.nukkit.item.Item;
 import com.alphaae.mcpe.servers.MainPlugin;
 import com.alphaae.mcpe.servers.model.RePlayer;
 
@@ -24,7 +25,7 @@ public class PlayerDataUtils {
         try {
             File playerDataFile = new File(PLAYER_DATA_FOLDER, uuid.toString() + FILE_TYPE);
             if (!playerDataFile.exists()) {
-                CreateNewPlayerData(playerDataFile, uuid);
+                CreateNewPlayerData(player);
             }
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(playerDataFile));
             RePlayer rePlayer = (RePlayer) inputStream.readObject();
@@ -49,13 +50,15 @@ public class PlayerDataUtils {
         return false;
     }
 
-    private static boolean CreateNewPlayerData(File playerDataFile, UUID uuid) {
+    private static boolean CreateNewPlayerData(Player player) {
         try {
+            UUID uuid = player.getUniqueId();
+            //给予初始玩家的操作
+
+            RePlayer rePlayer = new RePlayer(uuid, "新火", 2000);
+            File playerDataFile = new File(PLAYER_DATA_FOLDER, uuid.toString() + FILE_TYPE);
             playerDataFile.createNewFile();
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(playerDataFile));
-            RePlayer rePlayer = new RePlayer(uuid, "新火", 2000);
-
-
             outputStream.writeObject(rePlayer);
             outputStream.close();
             return true;

@@ -3,6 +3,7 @@ package com.alphaae.mcpe.servers.command;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.MainPlugin;
 import com.alphaae.mcpe.servers.StaticData;
@@ -33,6 +34,8 @@ public class HiCommand extends Command {
             //测试指令
             RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
             ChangePlayerCoinUtils.ReduceIcon(rePlayer, 100);
+
+            player.dropItem(new Item(347));
             return true;
         }
         return false;
