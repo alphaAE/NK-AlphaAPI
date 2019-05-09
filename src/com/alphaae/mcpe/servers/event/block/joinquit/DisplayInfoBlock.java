@@ -34,8 +34,15 @@ public class DisplayInfoBlock implements JoinQuitEventBlock {
                         String name = player.getDisplayName();
                         int ping = player.getPing();
                         int coin = rePlayer.getCoin();
+                        float tps = MainPlugin.getPlugin().getServer().getTicksPerSecond();
 
-                        player.sendActionBar(TextFormat.colorize("" + name + " &f延迟: " + ping + "ms 硬币: " + coin));
+                        StringBuilder showText = new StringBuilder()
+                                .append(name)
+                                .append(" &f硬币: ").append(coin)
+                                .append(" 延迟: ").append(ping).append("ms")
+                                .append(" TPS: ").append(tps);
+
+                        player.sendActionBar(TextFormat.colorize(showText.toString()));
                     } catch (Exception e) {
                         cancel();
                     }
