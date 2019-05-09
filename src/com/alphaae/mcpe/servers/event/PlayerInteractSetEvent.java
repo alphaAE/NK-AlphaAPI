@@ -10,6 +10,7 @@ import cn.nukkit.event.player.PlayerInteractEntityEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerItemHeldEvent;
 import cn.nukkit.item.Item;
+import cn.nukkit.plugin.Plugin;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.MainPlugin;
 import com.alphaae.mcpe.servers.form.FormWindowMeun;
@@ -34,9 +35,10 @@ public class PlayerInteractSetEvent implements Listener {
     //玩家手持物品事件
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onPlayerItemHeld(PlayerItemHeldEvent event) {
+        Plugin plugin = MainPlugin.getPlugin();
         Player player = event.getPlayer();
         Item item = event.getItem();
-        int slot = event.getSlot();
+        final int slot = event.getSlot();
         if (player != null && item != null) {
             if (item.getId() == 347) {
                 if (slot != 0) {
@@ -44,8 +46,8 @@ public class PlayerInteractSetEvent implements Listener {
                 } else {
                     player.getInventory().setHeldItemSlot(1);
                 }
-                FormWindowMeun form = new FormWindowMeun(player);
-                player.showFormWindow(form);
+                FormWindowMeun formWindowMeun = new FormWindowMeun(player);
+                player.showFormWindow(formWindowMeun);
             }
         }
     }
