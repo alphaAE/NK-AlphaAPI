@@ -26,26 +26,25 @@ public class DisplayInfoBlock implements JoinQuitEventBlock {
         final UUID uuid = player.getUniqueId();
 
         try {
-            infoHandler = MainPlugin.getPlugin().getServer().getScheduler().scheduleDelayedRepeatingTask(new Task() {
-                @Override
-                public void onRun(int i) {
-                    try {
-                        RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
-                        String name = player.getDisplayName();
-                        int ping = player.getPing();
-                        int coin = rePlayer.getCoin();
-                        float tps = MainPlugin.getPlugin().getServer().getTicksPerSecond();
+            infoHandler = MainPlugin.getPlugin().getServer().getScheduler().scheduleDelayedRepeatingTask(MainPlugin.getPlugin(), () -> {
+                try {
+                    RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
+                    String name = player.getDisplayName();
+                    int ping = player.getPing();
+                    int coin = rePlayer.getCoin();
+                    float tps = MainPlugin.getPlugin().getServer().getTicksPerSecond();
 
-                        StringBuilder showText = new StringBuilder()
-                                .append(name)
-                                .append(" &f硬币: ").append(coin)
-                                .append(" 延迟: ").append(ping).append("ms")
-                                .append(" TPS: ").append(tps);
+                    StringBuilder showText = new StringBuilder()
+                            .append(name)
+                            .append(" &f硬币: ").append(coin)
+                            .append(" 延迟: ").append(ping).append("ms")
+                            .append(" TPS: ").append(tps);
 
-                        player.sendActionBar(TextFormat.colorize(showText.toString()));
-                    } catch (Exception e) {
-                        cancel();
-                    }
+                    player.sendActionBar(TextFormat.colorize(showText.toString()));
+                } catch (Exception e) {
+                    if (infoHandler != null)
+                        infoHandler.cancel();
+                    e.printStackTrace();
                 }
             }, Config.JOIN_WAITING_TIME, 36);
         } catch (Exception e) {

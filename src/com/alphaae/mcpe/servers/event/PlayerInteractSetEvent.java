@@ -11,6 +11,7 @@ import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerItemHeldEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
+import com.alphaae.mcpe.servers.MainPlugin;
 import com.alphaae.mcpe.servers.form.FormWindowMeun;
 import com.alphaae.mcpe.servers.form.FormWindowOtherPlayer;
 
@@ -19,15 +20,15 @@ public class PlayerInteractSetEvent implements Listener {
     //玩家长按交互事件
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onPlayerInteract(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
-        Item item = event.getItem();
-        Block block = event.getBlock();
-        if (player != null && item != null) {
-            if (item.getId() == 0 && block.getId() == 0) {
-                FormWindowMeun form = new FormWindowMeun(player);
-                player.showFormWindow(form);
-            }
-        }
+//        Player player = event.getPlayer();
+//        Item item = event.getItem();
+//        Block block = event.getBlock();
+//        if (player != null && item != null) {
+//            if (item.getId() == 0 && block.getId() == 0) {
+//                FormWindowMeun form = new FormWindowMeun(player);
+//                player.showFormWindow(form);
+//            }
+//        }
     }
 
     //玩家手持物品事件
@@ -35,8 +36,14 @@ public class PlayerInteractSetEvent implements Listener {
     public void onPlayerItemHeld(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         Item item = event.getItem();
+        int slot = event.getSlot();
         if (player != null && item != null) {
             if (item.getId() == 347) {
+                if (slot != 0) {
+                    player.getInventory().setHeldItemSlot(0);
+                } else {
+                    player.getInventory().setHeldItemSlot(1);
+                }
                 FormWindowMeun form = new FormWindowMeun(player);
                 player.showFormWindow(form);
             }

@@ -52,6 +52,6 @@ public class MainPlugin extends PluginBase {
         pluginManager.registerEvents(new PlayerJoinQuitEvent(), this);
         pluginManager.registerEvents(new PlayerInteractSetEvent(), this);
         pluginManager.registerEvents(new FormRespondedEvent(), this);
-        pluginManager.registerEvents(new PlayerInventoryEvent(), this);
+//        pluginManager.registerEvents(new PlayerInventoryEvent(), this);
     }
 }
