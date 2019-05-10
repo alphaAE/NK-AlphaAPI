@@ -1,6 +1,8 @@
 package com.alphaae.mcpe.servers.model;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class RePlayer implements Serializable {
@@ -9,6 +11,8 @@ public class RePlayer implements Serializable {
     private String title;
     //硬币
     private int coin;
+    //记录的传送点
+    private Map<String, UserLocation> userLocationMap = new HashMap<>();
 
     public RePlayer(UUID uuid, String title, int coin) {
         this.uuid = uuid;
@@ -39,4 +43,28 @@ public class RePlayer implements Serializable {
     public void setCoin(int coin) {
         this.coin = coin;
     }
+
+    public Map<String, UserLocation> getUserLocationMap() {
+        return userLocationMap;
+    }
+
+    public boolean putUserLocation(String name, UserLocation location) {
+        try {
+            userLocationMap.put(name, location);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean removeUserLocation(String name) {
+        try {
+            userLocationMap.remove(name);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
 }

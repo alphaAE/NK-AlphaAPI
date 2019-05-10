@@ -5,6 +5,7 @@ import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
 import com.alphaae.mcpe.servers.command.HiCommand;
+import com.alphaae.mcpe.servers.command.UpdataUserDataCommand;
 import com.alphaae.mcpe.servers.event.FormRespondedEvent;
 import com.alphaae.mcpe.servers.event.PlayerInventoryEvent;
 import com.alphaae.mcpe.servers.event.PlayerInteractSetEvent;
@@ -45,6 +46,7 @@ public class MainPlugin extends PluginBase {
     private void registerCommands() {
         SimpleCommandMap commandMap = getServer().getCommandMap();
         commandMap.register("AlphaAPI", new HiCommand(this));
+        commandMap.register("AlphaAPI", new UpdataUserDataCommand(this));
     }
 
     private void registerEvents() {

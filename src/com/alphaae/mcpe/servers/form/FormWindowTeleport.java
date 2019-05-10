@@ -6,6 +6,8 @@ import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindowSimple;
+import cn.nukkit.level.Location;
+import cn.nukkit.level.Position;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.event.block.form.FormEvent;
@@ -27,6 +29,7 @@ public class FormWindowTeleport extends FormWindowSimple implements FormEvent {
     private void createButtons(Player player, RePlayer rePlayer) {
         addButton(new ElementButton("返回"));
         addButton(new ElementButton("上次死亡地点"));
+        addButton(new ElementButton("主城"));
         addButton(new ElementButton(""));
     }
 
@@ -40,8 +43,13 @@ public class FormWindowTeleport extends FormWindowSimple implements FormEvent {
                     player.showFormWindow(formWindowMeun);
                     break;
                 case "上次死亡地点":
-                    player.sendMessage("传送");
+                    player.sendMessage("" + player.getLevel().getName());
                     break;
+                case "主城":
+                    Position spawnLocation = player.getLevel().getSpawnLocation();
+                    player.teleport(spawnLocation);
+                    break;
+
             }
         }
     }

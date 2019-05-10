@@ -26,7 +26,7 @@ public class ChangePlayerCoinUtils {
         return false;
     }
 
-    public static boolean GaveIcon(RePlayer rePlayer1, RePlayer rePlayer2, int count) {
+    public static boolean GiveIcon(RePlayer rePlayer1, RePlayer rePlayer2, int count) {
         int userCoin1 = rePlayer1.getCoin();
         int userCoin2 = rePlayer2.getCoin();
         int newCoin1 = userCoin1 - count;
