@@ -54,6 +54,7 @@ public class PlayerDataUtils {
         try {
             UUID uuid = player.getUniqueId();
             //给予初始玩家的操作
+            player.getInventory().addItem(new Item(347));
 
             RePlayer rePlayer = new RePlayer(uuid, "新火", 2000);
             File playerDataFile = new File(PLAYER_DATA_FOLDER, uuid.toString() + FILE_TYPE);
