@@ -8,6 +8,7 @@ import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.MainPlugin;
 import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.model.RePlayer;
+import com.alphaae.mcpe.servers.model.UserLocation;
 import com.alphaae.mcpe.servers.utils.ChangePlayerCoinUtils;
 
 import java.util.UUID;
@@ -34,8 +35,7 @@ public class HiCommand extends Command {
             //测试指令
             RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
             ChangePlayerCoinUtils.ReduceIcon(rePlayer, 100);
-
-            player.dropItem(new Item(347));
+            rePlayer.putUserLocation("坐标1", new UserLocation(player.getX(), player.getY(), player.getZ(), player.getLevel().getName()));
             return true;
         }
         return false;

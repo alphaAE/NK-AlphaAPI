@@ -14,14 +14,18 @@ import com.sun.istack.internal.NotNull;
 
 public class FormWindowMeun extends FormWindowSimple implements FormEvent {
 
+    private transient Player player;
+    private transient RePlayer rePlayer;
+
     public FormWindowMeun(@NotNull Player player) {
         super("我", "");
-        RePlayer rePlayer = StaticData.rePlayerMap.get(player.getUniqueId());
-        createContents(player, rePlayer);
-        createButtons(player, rePlayer);
+        this.player = player;
+        this.rePlayer = StaticData.rePlayerMap.get(player.getUniqueId());
+        createContents();
+        initButtons();
     }
 
-    private void createContents(Player player, RePlayer rePlayer) {
+    private void createContents() {
         String name = player.getName();
         String content = TextFormat.colorize("&b" + name + "&f\n" +
                 "---------------------------------\n" +
@@ -32,7 +36,7 @@ public class FormWindowMeun extends FormWindowSimple implements FormEvent {
         setContent(content);
     }
 
-    private void createButtons(Player player, RePlayer rePlayer) {
+    private void initButtons() {
         addButton(new ElementButton("传送", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/ender_pearl.png")));
         addButton(new ElementButton("任务", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/book_writable.png")));
         addButton(new ElementButton("升级", new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_PATH, "textures/items/iron_pickaxe.png")));

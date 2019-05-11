@@ -1,11 +1,12 @@
 package com.alphaae.mcpe.servers.model;
 
-import java.io.Serializable;
+import com.google.gson.Gson;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class RePlayer implements Serializable {
+public class RePlayer {
     private UUID uuid;
     //称号
     private String title;
@@ -66,5 +67,12 @@ public class RePlayer implements Serializable {
         }
     }
 
+    public String getJSONData() {
+        return (new Gson()).toJson(this);
+    }
+
+    public static RePlayer decodeObject(String json) {
+        return (new Gson()).fromJson(json, RePlayer.class);
+    }
 
 }

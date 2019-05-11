@@ -8,6 +8,8 @@ import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.model.RePlayer;
 import com.alphaae.mcpe.servers.utils.PlayerDataUtils;
 
+import java.util.UUID;
+
 public class LoadPlayerDataBlock implements JoinQuitEventBlock {
 
     @Override
@@ -16,18 +18,21 @@ public class LoadPlayerDataBlock implements JoinQuitEventBlock {
 
         //读取数据
         RePlayer rePlayer = PlayerDataUtils.LoadData(player);
+        StaticData.rePlayerMap.put(player.getUniqueId(), rePlayer);
 
+        //设置玩家部分属性
         String title = rePlayer.getTitle();
-
         player.setNameTag(TextFormat.colorize("&e[" + title + "] &b" + player.getName() + "&f"));
         player.setDisplayName(TextFormat.colorize("&e[" + title + "] &b" + player.getName() + "&f"));
-        StaticData.rePlayerMap.put(player.getUniqueId(), rePlayer);
     }
 
     @Override
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        StaticData.rePlayerMap.remove(player.getUniqueId());
+        UUID uuid = player.getUniqueId();
+        RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
+        PlayerDataUtils.SaveData(rePlayer);
+        StaticData.rePlayerMap.remove(uuid);
     }
 
 
