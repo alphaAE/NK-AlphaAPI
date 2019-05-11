@@ -45,6 +45,7 @@ public class FormWindowTeleport extends FormWindowSimple implements FormEvent {
         while (iterator.hasNext()) {
             Map.Entry entry = (Map.Entry) iterator.next();
             String key = (String) entry.getKey();
+            if (key.equals("__deathPosition__")) continue;
             UserLocation value = (UserLocation) entry.getValue();
             addButton(new ElementButton(key + " ( " + value.getLevelName() + " )"));
         }
@@ -61,7 +62,15 @@ public class FormWindowTeleport extends FormWindowSimple implements FormEvent {
                     player.showFormWindow(formWindowMeun);
                     return;
                 case "上次死亡地点":
-                    player.sendMessage("" + player.getLevel().getName());
+                    Map<String, UserLocation> userLocationMap = rePlayer.getUserLocationMap();
+                    UserLocation deathUserLocation = userLocationMap.get("__deathPosition__");
+                    if (deathUserLocation != null) {
+                        Level level = MainPlugin.getPlugin().getServer().getLevelByName(deathUserLocation.getLevelName());
+                        Position deathPosition = new Position(deathUserLocation.getX(), deathUserLocation.getY(), deathUserLocation.getZ(), level);
+                        player.teleport(deathPosition);
+                    } else {
+                        player.sendPopup(TextFormat.colorize("&4不存在死亡记录点"));
+                    }
                     return;
                 case "主城":
                     Position spawnLocation = player.getLevel().getSpawnLocation();

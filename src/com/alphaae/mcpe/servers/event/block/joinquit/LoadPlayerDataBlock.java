@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.utils.TextFormat;
+import com.alphaae.mcpe.servers.MainPlugin;
 import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.model.RePlayer;
 import com.alphaae.mcpe.servers.utils.PlayerDataUtils;
@@ -31,7 +32,12 @@ public class LoadPlayerDataBlock implements JoinQuitEventBlock {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
         RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
-        PlayerDataUtils.SaveData(rePlayer);
+        if (rePlayer != null) {
+            PlayerDataUtils.SaveData(rePlayer);
+            MainPlugin.getPlugin().getServer().getLogger().info("玩家退出服务器 数据保存成功！");
+        } else {
+            MainPlugin.getPlugin().getServer().getLogger().error("玩家退出服务器 数据丢失！");
+        }
         StaticData.rePlayerMap.remove(uuid);
     }
 

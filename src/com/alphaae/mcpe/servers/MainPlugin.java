@@ -6,10 +6,7 @@ import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
 import com.alphaae.mcpe.servers.command.HiCommand;
 import com.alphaae.mcpe.servers.command.UpdataUserDataCommand;
-import com.alphaae.mcpe.servers.event.FormRespondedEvent;
-import com.alphaae.mcpe.servers.event.PlayerInventoryEvent;
-import com.alphaae.mcpe.servers.event.PlayerInteractSetEvent;
-import com.alphaae.mcpe.servers.event.PlayerJoinQuitEvent;
+import com.alphaae.mcpe.servers.event.*;
 
 public class MainPlugin extends PluginBase {
 
@@ -54,6 +51,7 @@ public class MainPlugin extends PluginBase {
         pluginManager.registerEvents(new PlayerJoinQuitEvent(), this);
         pluginManager.registerEvents(new PlayerInteractSetEvent(), this);
         pluginManager.registerEvents(new FormRespondedEvent(), this);
+        pluginManager.registerEvents(new PlayerDeathRespawnEvent(), this);
 //        pluginManager.registerEvents(new PlayerInventoryEvent(), this);
     }
 }
