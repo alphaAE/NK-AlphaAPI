@@ -15,6 +15,7 @@ import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.event.block.form.FormEvent;
 import com.alphaae.mcpe.servers.model.RePlayer;
 import com.alphaae.mcpe.servers.model.UserLocation;
+import com.alphaae.mcpe.servers.utils.ToastUtils;
 import com.sun.istack.internal.NotNull;
 
 import java.util.Iterator;
@@ -29,11 +30,7 @@ public class FormWindowTeleport extends FormWindowSimple implements FormEvent {
         super("传送地点", "");
         this.player = player;
         this.rePlayer = StaticData.rePlayerMap.get(player.getUniqueId());
-        createContents();
         initButtons();
-    }
-
-    private void createContents() {
     }
 
     private void initButtons() {
@@ -49,6 +46,7 @@ public class FormWindowTeleport extends FormWindowSimple implements FormEvent {
             UserLocation value = (UserLocation) entry.getValue();
             addButton(new ElementButton(key + " ( " + value.getLevelName() + " )"));
         }
+        addButton(new ElementButton("编辑储存的坐标"));
     }
 
     public void RespondedEvent(PlayerFormRespondedEvent event) {
@@ -69,12 +67,16 @@ public class FormWindowTeleport extends FormWindowSimple implements FormEvent {
                         Position deathPosition = new Position(deathUserLocation.getX(), deathUserLocation.getY(), deathUserLocation.getZ(), level);
                         player.teleport(deathPosition);
                     } else {
-                        player.sendPopup(TextFormat.colorize("&4不存在死亡记录点"));
+                        ToastUtils.Show(player, ToastUtils.INFO_TYPE_ERROR, "不存在死亡记录点");
                     }
                     return;
                 case "主城":
                     Position spawnLocation = player.getLevel().getSpawnLocation();
                     player.teleport(spawnLocation);
+                    return;
+                case "编辑储存的坐标":
+                    FormWindowTeleportEdit formWindowTeleportEdit = new FormWindowTeleportEdit(player);
+                    player.showFormWindow(formWindowTeleportEdit);
                     return;
             }
             Map<String, UserLocation> userLocationMap = rePlayer.getUserLocationMap();

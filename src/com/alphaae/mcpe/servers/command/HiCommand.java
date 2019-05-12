@@ -35,7 +35,6 @@ public class HiCommand extends Command {
             //测试指令
             RePlayer rePlayer = StaticData.rePlayerMap.get(uuid);
             ChangePlayerCoinUtils.ReduceIcon(rePlayer, 100);
-            rePlayer.putUserLocation("坐标1", new UserLocation(player.getX(), player.getY(), player.getZ(), player.getLevel().getName()));
             return true;
         }
         return false;
