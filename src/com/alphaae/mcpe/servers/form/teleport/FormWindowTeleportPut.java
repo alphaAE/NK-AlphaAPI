@@ -1,4 +1,4 @@
-package com.alphaae.mcpe.servers.form;
+package com.alphaae.mcpe.servers.form.teleport;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;

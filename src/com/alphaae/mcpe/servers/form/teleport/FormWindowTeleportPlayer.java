@@ -1,19 +1,14 @@
-package com.alphaae.mcpe.servers.form;
+package com.alphaae.mcpe.servers.form.teleport;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementDropdown;
-import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
-import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindowCustom;
-import cn.nukkit.level.Position;
 import com.alphaae.mcpe.servers.MainPlugin;
-import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.event.block.form.FormEvent;
 import com.alphaae.mcpe.servers.model.RePlayer;
-import com.alphaae.mcpe.servers.model.UserLocation;
 import com.alphaae.mcpe.servers.utils.ToastUtils;
 import com.sun.istack.internal.NotNull;
 
@@ -63,6 +58,5 @@ public class FormWindowTeleportPlayer extends FormWindowCustom implements FormEv
         }
 
     }
-
 
 }

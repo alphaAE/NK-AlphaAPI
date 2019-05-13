@@ -1,18 +1,16 @@
-package com.alphaae.mcpe.servers.form;
+package com.alphaae.mcpe.servers.form.teleport;
 
 import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindowSimple;
 import cn.nukkit.level.Level;
-import cn.nukkit.level.Location;
 import cn.nukkit.level.Position;
-import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.MainPlugin;
 import com.alphaae.mcpe.servers.StaticData;
 import com.alphaae.mcpe.servers.event.block.form.FormEvent;
+import com.alphaae.mcpe.servers.form.FormWindowMeun;
 import com.alphaae.mcpe.servers.model.RePlayer;
 import com.alphaae.mcpe.servers.model.UserLocation;
 import com.alphaae.mcpe.servers.utils.ToastUtils;
