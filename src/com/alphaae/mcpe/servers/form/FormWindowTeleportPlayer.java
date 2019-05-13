@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.element.ElementDropdown;
 import cn.nukkit.form.element.ElementInput;
+import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseData;
 import cn.nukkit.form.window.FormWindowCustom;
@@ -42,6 +43,7 @@ public class FormWindowTeleportPlayer extends FormWindowCustom implements FormEv
             playerList.add(tPlayer.getName());
         }
         addElement(new ElementDropdown("选择玩家：", playerList));
+        addElement(new ElementLabel("\n\n\n\n\n\n\n\n"));
     }
 
     @Override
