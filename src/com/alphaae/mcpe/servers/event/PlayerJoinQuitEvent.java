@@ -5,7 +5,6 @@ import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
-import com.alphaae.mcpe.servers.event.block.joinquit.DisplayInfoBlock;
 import com.alphaae.mcpe.servers.event.block.joinquit.JoinQuitEventBlock;
 import com.alphaae.mcpe.servers.event.block.joinquit.JoinWindowBlock;
 import com.alphaae.mcpe.servers.event.block.joinquit.LoadPlayerDataBlock;
@@ -19,7 +18,6 @@ public class PlayerJoinQuitEvent implements Listener {
 
     static {
         eventBlockList = new ArrayList<>();
-        eventBlockList.add(new DisplayInfoBlock());
         eventBlockList.add(new JoinWindowBlock());
         eventBlockList.add(new LoadPlayerDataBlock());
     }

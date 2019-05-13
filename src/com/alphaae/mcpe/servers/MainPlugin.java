@@ -7,6 +7,7 @@ import cn.nukkit.plugin.PluginManager;
 import com.alphaae.mcpe.servers.command.HiCommand;
 import com.alphaae.mcpe.servers.command.UpdataUserDataCommand;
 import com.alphaae.mcpe.servers.event.*;
+import com.alphaae.mcpe.servers.task.DisplayPlayerInfoTask;
 
 public class MainPlugin extends PluginBase {
 
@@ -25,6 +26,7 @@ public class MainPlugin extends PluginBase {
     public void onEnable() {
         plugin = this;
         initConfig();
+        startTask();
         registerCommands();
         registerEvents();
     }
@@ -38,6 +40,10 @@ public class MainPlugin extends PluginBase {
         getDataFolder().mkdirs();
         saveResource("config.yml");
         reloadConfig();
+    }
+
+    private void startTask() {
+        new DisplayPlayerInfoTask(this);
     }
 
     private void registerCommands() {

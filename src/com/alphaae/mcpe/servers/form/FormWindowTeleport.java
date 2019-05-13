@@ -36,6 +36,7 @@ public class FormWindowTeleport extends FormWindowSimple implements FormEvent {
     private void initButtons() {
         addButton(new ElementButton("返回"));
         addButton(new ElementButton("上次死亡地点"));
+        addButton(new ElementButton("玩家"));
         addButton(new ElementButton("主城"));
         Map<String, UserLocation> userLocationMap = rePlayer.getUserLocationMap();
         Iterator iterator = userLocationMap.entrySet().iterator();
@@ -71,7 +72,8 @@ public class FormWindowTeleport extends FormWindowSimple implements FormEvent {
                     }
                     return;
                 case "玩家":
-                    
+                    FormWindowTeleportPlayer formWindowTeleportPlayer = new FormWindowTeleportPlayer(player);
+                    player.showFormWindow(formWindowTeleportPlayer);
                     return;
                 case "主城":
                     Position spawnLocation = player.getLevel().getSpawnLocation();
