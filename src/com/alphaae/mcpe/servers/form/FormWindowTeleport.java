@@ -70,6 +70,9 @@ public class FormWindowTeleport extends FormWindowSimple implements FormEvent {
                         ToastUtils.Show(player, ToastUtils.INFO_TYPE_ERROR, "不存在死亡记录点");
                     }
                     return;
+                case "玩家":
+                    
+                    return;
                 case "主城":
                     Position spawnLocation = player.getLevel().getSpawnLocation();
                     player.teleport(spawnLocation);
