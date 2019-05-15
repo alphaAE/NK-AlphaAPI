@@ -6,10 +6,12 @@ import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
+import cn.nukkit.event.player.PlayerChatEvent;
 import cn.nukkit.event.player.PlayerInteractEntityEvent;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerItemHeldEvent;
 import cn.nukkit.item.Item;
+import cn.nukkit.level.Position;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.utils.TextFormat;
 import com.alphaae.mcpe.servers.MainPlugin;
@@ -65,6 +67,25 @@ public class PlayerInteractSetEvent implements Listener {
                 player.showFormWindow(formWindowOtherPlayer);
             } catch (Exception e) {
                 player.sendMessage(TextFormat.colorize("&4非玩家单位"));
+            }
+        }
+    }
+
+    //测试事件
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
+    public void onPlayerChat(PlayerChatEvent event) {
+        final Player player = event.getPlayer();
+        if (player instanceof Player) {
+            Position position = player.getPosition();
+            String msg = event.getMessage();
+            if (msg.equals("发送坐标")) {
+                StringBuilder showText = new StringBuilder()
+                        .append("[坐标] : 我在 ").append(player.getLevel().getName()).append("世界的")
+                        .append(" x: ").append(position.getX())
+                        .append(" y: ").append(position.getY())
+                        .append(" z: ").append(position.getZ())
+                        .append(" 坐标");
+                player.sendMessage(showText.toString());
             }
         }
     }
